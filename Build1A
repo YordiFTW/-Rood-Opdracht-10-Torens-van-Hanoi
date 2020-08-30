@@ -1,0 +1,73 @@
+using System;
+using System.Collections;
+
+namespace HanoiTower2
+{
+    class Program
+    {
+
+        static Stack A = new Stack();
+        static Stack B = new Stack();
+        static Stack C = new Stack();
+
+        static void Main(string[] args)
+        {
+            A.Push(8);
+            A.Push(7);
+            A.Push(6);
+            A.Push(5);
+            A.Push(4);
+            A.Push(3);
+            A.Push(2);
+            A.Push(1);
+            PrintStacks();
+            Move(8, A, C, B);
+            
+
+            Console.ReadLine();
+            
+
+        }
+
+        public static void Move (int numberOfDiscs, Stack from, Stack to, Stack interchange)
+        {
+            if (numberOfDiscs > 0)
+            {
+                Move(numberOfDiscs - 1, from, interchange, to);
+                MoveDisc(from, to);
+                Move(numberOfDiscs - 1, interchange, to, from);
+            }
+        }
+
+        public static void MoveDisc(Stack from, Stack to)
+        {
+            var temp = from.Pop();
+            to.Push(temp);
+            PrintStacks();
+        }
+
+        public static void PrintStacks()
+        {
+            Console.Write("A: ");
+            foreach (var item in A)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+
+            Console.Write("B: ");
+            foreach (var item in B)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+
+            Console.Write("C: ");
+            foreach (var item in C)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine("\n");
+        }
+    }
+}
